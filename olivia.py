@@ -79,6 +79,12 @@ async def on_message(message: discord.Message):
             await message.channel.typing()
             result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content}\"")
 
+        for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia"]:
+            if misspell in message.content.lower():
+                await message.channel.typing()
+                result = await generate(f"Paraphrase the following: YOU STUPID BITCH! MY NAME ISN'T FUCKING {misspell} IT'S OLIVIA YOU RETARD!")
+                break
+
         elif is_reply:
             await message.channel.typing()
             result = await generate(f"You are a mentally ill girl named Olivia and you are engaged in conversation. You have just said \"{reply_to_message.content}\", and someone replied with the following message: \"{message.content}\". Create a reply back.")
