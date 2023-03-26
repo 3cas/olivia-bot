@@ -70,37 +70,34 @@ async def on_message(message: discord.Message):
         if reply_to_message.author.id == 1089381933710065804:
             is_reply = True
 
-    if "<@1089381933710065804>" in message.content:
-        await message.channel.typing()
-        if message.author.id != 1089381933710065804:
+    if message.author.id != 1089381933710065804:
+        if "<@1089381933710065804>" in message.content:
+            await message.channel.typing()
             result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content.replace('<@1089381933710065804>', '')}\"")
 
-    elif "olivia" in message.content.lower():
-        await message.channel.typing()
-        if message.author.id != 1089381933710065804:
+        elif "olivia" in message.content.lower():
+            await message.channel.typing()
             result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content}\"")
 
-    elif is_reply:
-        await message.channel.typing()
-        if message.author.id != 1089381933710065804:
+        elif is_reply:
+            await message.channel.typing()
             result = await generate(f"You have just said \"{reply_to_message.content}\". You are a mentally ill girl named Olivia. Reply to the following message with the given context: \"{message.content}\".")
 
-    elif message.guild.id == 1015038824549716019:
-        count += 1
+        elif message.guild.id == 1015038824549716019:
+            count += 1
 
-        if count > target:
-            await message.channel.typing()
-            count = 0
-            target = random.randint(TARGET_MIN, TARGET_MAX)
-            print(f"Target reached and funny sent! new target is {target}")
+            if count > target:
+                await message.channel.typing()
+                count = 0
+                target = random.randint(TARGET_MIN, TARGET_MAX)
+                print(f"Target reached and funny sent! new target is {target}")
 
-            if message.author.id != 1089381933710065804:
                 result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: {message.content}")
-    
+        
             else:
                 count = TARGET_MAX - random.randint(int(TARGET_MAX/100), int(TARGET_MAX/10))
 
-    if result:
-        await message.reply(result)
+        if result:
+            await message.reply(result)
 
 bot.run(TOKEN)
