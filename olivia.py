@@ -62,6 +62,7 @@ async def on_message(message: discord.Message):
     global count, target
 
     is_reply = False
+    the_misspell = None
     result = None
 
     if message.reference:
@@ -69,6 +70,10 @@ async def on_message(message: discord.Message):
         reply_to_message = await channel.fetch_message(message.reference.message_id)
         if reply_to_message.author.id == 1089381933710065804:
             is_reply = True
+
+    for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia"]:
+        if misspell in message.content.lower():
+            the_misspell = misspell
 
     if message.author.id != 1089381933710065804:
         if "<@1089381933710065804>" in message.content:
@@ -79,11 +84,9 @@ async def on_message(message: discord.Message):
             await message.channel.typing()
             result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content}\"")
 
-        for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia"]:
-            if misspell in message.content.lower():
-                await message.channel.typing()
-                result = await generate(f"Paraphrase the following: YOU STUPID BITCH! MY NAME ISN'T FUCKING {misspell} IT'S OLIVIA YOU RETARD!")
-                break
+        elif the_misspell:
+            await message.channel.typing()
+            result = await generate(f"Paraphrase the following: YOU STUPID BITCH! MY NAME ISN'T FUCKING {misspell} IT'S OLIVIA YOU RETARD!")
 
         elif is_reply:
             await message.channel.typing()
