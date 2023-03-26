@@ -93,9 +93,6 @@ async def on_message(message: discord.Message):
                 print(f"Target reached and funny sent! new target is {target}")
 
                 result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: {message.content}")
-        
-            else:
-                count = TARGET_MAX - random.randint(int(TARGET_MAX/100), int(TARGET_MAX/10))
 
         if result:
             await message.reply(result)
