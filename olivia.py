@@ -81,7 +81,7 @@ async def on_message(message: discord.Message):
 
         elif is_reply:
             await message.channel.typing()
-            result = await generate(f"You have just said \"{reply_to_message.content}\". You are a mentally ill girl named Olivia. Reply to the following message with the given context: \"{message.content}\".")
+            result = await generate(f"You are a mentally ill girl named Olivia and you are engaged in conversation. You have just said \"{reply_to_message.content}\", and someone replied with the following message: \"{message.content}\". Create a reply back.")
 
         elif message.guild.id == 1015038824549716019:
             count += 1
