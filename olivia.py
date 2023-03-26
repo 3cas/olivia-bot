@@ -74,6 +74,10 @@ async def on_message(message: discord.Message):
         await message.channel.typing()
         result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content.replace('<@1089381933710065804>', '')}\"")
 
+    elif "olivia" in message.content.lower():
+        await message.channel.typing()
+        result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content}\"")
+
     elif is_reply:
         await message.channel.typing()
         result = await generate(f"You have just said \"{reply_to_message.content}\". You are a mentally ill girl named Olivia. Reply to the following message with the given context: \"{message.content}\".")
