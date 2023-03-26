@@ -86,7 +86,7 @@ async def on_message(message: discord.Message):
 
         elif the_misspell:
             await message.channel.typing()
-            result = await generate(f"Paraphrase the following: YOU STUPID BITCH! MY NAME ISN'T FUCKING {misspell} IT'S OLIVIA YOU RETARD!")
+            result = await generate(f"Paraphrase the following: YOU STUPID BITCH! MY NAME ISN'T FUCKING {the_misspell} IT'S OLIVIA YOU RETARD!")
 
         elif is_reply:
             await message.channel.typing()
