@@ -78,7 +78,7 @@ async def on_message(message: discord.Message):
 
     if message.author.id != 1089381933710065804:
         if message.author.id == 857779900869640192:
-            await message.add_reaction("warning")
+            await message.add_reaction("\u26a0\ufe0f")
 
         if "<@1089381933710065804>" in message.content:
             await message.channel.typing()
