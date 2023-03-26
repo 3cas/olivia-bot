@@ -81,11 +81,11 @@ async def on_message(message: discord.Message):
             break
 
     if message.author.id != ID_SELF:
-        if message.author.id in [ID_JASON, ID_CEASE]:
-            try:
-                await message.add_reaction("\u26a0")
-            except:
-                pass
+        # if message.author.id in [ID_JASON, ID_CEASE]:
+        #     try:
+        #         await message.add_reaction("\u26a0")
+        #     except:
+        #         pass
 
         if f"<@{ID_SELF}>" in message.content:
             await message.channel.typing()
