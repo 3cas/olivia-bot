@@ -5,6 +5,14 @@ import os
 import aiohttp
 import random
 
+# 150, 300
+TARGET_MIN = 10
+TARGET_MAX = 100
+
+ID_SELF = 1089381933710065804
+ID_JASON = 857779900869640192
+ID_CEASE = 743340045628342324
+
 dotenv.load_dotenv()
 TOKEN = os.getenv("OLIVIA_TOKEN")
 DEEPAI_KEY = os.getenv("DEEPAI_KEY")
@@ -14,7 +22,7 @@ class MyBot(commands.Bot):
         super().__init__(
             intents=intents,
             command_prefix="o!",
-            owner_id=743340045628342324
+            owner_id=ID_CEASE
         )
 
     async def setup_hook(self) -> None:
@@ -28,10 +36,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 bot = MyBot(intents=intents)
-
-# 150, 300
-TARGET_MIN = 10
-TARGET_MAX = 100
 
 count = 0
 target = random.randint(TARGET_MIN, TARGET_MAX)
@@ -68,7 +72,7 @@ async def on_message(message: discord.Message):
     if message.reference:
         channel = await bot.fetch_channel(message.reference.channel_id)
         reply_to_message = await channel.fetch_message(message.reference.message_id)
-        if reply_to_message.author.id == 1089381933710065804:
+        if reply_to_message.author.id == ID_SELF:
             is_reply = True
 
     for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia"]:
@@ -76,16 +80,16 @@ async def on_message(message: discord.Message):
             the_misspell = misspell
             break
 
-    if message.author.id != 1089381933710065804:
-        if message.author.id == 857779900869640192:
+    if message.author.id != ID_SELF:
+        if message.author.id in [ID_JASON, ID_CEASE]:
             try:
                 await message.add_reaction("\u26a0")
             except:
                 pass
 
-        if "<@1089381933710065804>" in message.content:
+        if f"<@{ID_SELF}>" in message.content:
             await message.channel.typing()
-            result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content.replace('<@1089381933710065804>', '')}\"")
+            result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content.replace(f'<@{ID_SELF}>', '')}\"")
 
         elif "olivia" in message.content.lower():
             await message.channel.typing()
