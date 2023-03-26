@@ -31,7 +31,7 @@ bot = MyBot(intents=intents)
 
 # 150, 300
 TARGET_MIN = 10
-TARGET_MAX = 20
+TARGET_MAX = 100
 
 count = 0
 target = random.randint(TARGET_MIN, TARGET_MAX)
