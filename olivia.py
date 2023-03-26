@@ -77,6 +77,9 @@ async def on_message(message: discord.Message):
             break
 
     if message.author.id != 1089381933710065804:
+        if message.author.id == 857779900869640192:
+            message.add_reaction(":warning:")
+
         if "<@1089381933710065804>" in message.content:
             await message.channel.typing()
             result = await generate(f"Respond as if you are a mentally ill girl named Olivia to the following message: \"{message.content.replace('<@1089381933710065804>', '')}\"")
