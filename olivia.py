@@ -74,6 +74,7 @@ async def on_message(message: discord.Message):
     for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia"]:
         if misspell in message.content.lower():
             the_misspell = misspell
+            break
 
     if message.author.id != 1089381933710065804:
         if "<@1089381933710065804>" in message.content:
