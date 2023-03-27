@@ -43,8 +43,8 @@ target = random.randint(TARGET_MIN, TARGET_MAX)
 print(f"Original target set to {target}")
 
 async def get_adj():
-    traits = ["mentally ill", "very pretty", "annoying", "flirtatious", "catlike"]
-    return f"{traits[random.randint(0, 4)]} and {traits[random.randint(0, 4)]}"
+    traits = ["mentally ill", "very pretty", "annoying", "flirtatious", "catlike", "rude", "silly"]
+    return f"{random.choice(traits)} and {random.choice(traits)}"
 
 async def generate(prompt):
     prompt = prompt.replace("$DEBUG", "")
