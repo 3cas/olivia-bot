@@ -1,5 +1,8 @@
 # olivia-bot
-This bot is a bot I made for a server I'm in, to mess with a user known as lestz AKA Olivia. She is okay with it and thinks it's funny, so the purpose isn't to make fun of her or to offend anyone.
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/it-works-why.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+This bot is a bot I made for a server I'm in, to mess with a user known as lestz AKA Olivia. She is okay with it and thinks it's funny, so the purpose isn't to make fun of her or to offend anyone. The bot uses AI text generation to make funny responses as if it were Olivia, sort of like GenAI.
 
 ### How to activate the bot
 There are 5 ways of activating Olivia bot.
