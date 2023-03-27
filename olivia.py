@@ -11,6 +11,7 @@ TARGET_MAX = 100
 
 ID_SELF = 1089381933710065804
 ID_JASON = 857779900869640192
+ID_MONKEY = 642484843401183272
 ID_CEASE = 743340045628342324
 
 dotenv.load_dotenv()
@@ -81,7 +82,7 @@ async def on_message(message: discord.Message):
             break
 
     if message.author.id != ID_SELF:
-        if message.author.id == ID_JASON:
+        if message.author.id == ID_MONKEY:
             try:
                 await message.add_reaction("\u26a0")
             except:
