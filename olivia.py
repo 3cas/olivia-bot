@@ -72,7 +72,7 @@ async def on_message(message: discord.Message):
 
     is_reply = False
     misspell = None
-    result = None
+    query = None
     message_bot_replied_to = None
 
     if message.reference:
@@ -98,15 +98,15 @@ async def on_message(message: discord.Message):
 
         if f"<@{ID_SELF}>" in message.content:
             await message.channel.typing()
-            result = await generate(f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content.replace(f'<@{ID_SELF}>', 'Olivia')}\"")
+            query = f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content.replace(f'<@{ID_SELF}>', 'Olivia')}\""
 
         elif "olivia" in message.content.lower():
             await message.channel.typing()
-            result = await generate(f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content}\"")
+            query = f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content}\""
 
         elif misspell:
             await message.channel.typing()
-            result = await generate(f"Paraphrase the following, using expletives and all capitalized: YOU STUPID IDIOT! MY NAME ISN'T FREAKING {misspell.capitalize()} IT'S OLIVIA YOU DUMBASS!")
+            query = f"Paraphrase the following, using expletives and all capitalized: YOU STUPID IDIOT! MY NAME ISN'T FREAKING {misspell.capitalize()} IT'S OLIVIA YOU DUMBASS!"
 
         elif is_reply:
             await message.channel.typing()
@@ -114,8 +114,6 @@ async def on_message(message: discord.Message):
             if message_bot_replied_to:
                 query += f"{message_bot_replied_to.author.name}: {message_bot_replied_to.content}\n"
             query += f"Olivia: {message_user_replied_to.content}\n{message.author.name}: {message.content}\nOlivia: "
-
-            result = await generate(query)
 
         elif message.guild.id == 1015038824549716019:
             count += 1
@@ -125,10 +123,12 @@ async def on_message(message: discord.Message):
                 count = 0
                 target = random.randint(TARGET_MIN, TARGET_MAX)
                 print(f"Target reached and funny sent! new target is {target}")
+                query = f"Someone named {message.author.name} just sent the following message: \"{message.content}\". Respond as if you are a {await get_adj()} girl named Olivia."
 
-                result = await generate(f"Someone named {message.author.name} just sent the following message: \"{message.content}\". Respond as if you are a {await get_adj()} girl named Olivia.")
-
-        if result:
+        if query:
+            if "$DEBUG" in message:
+                result = f"[DEBUG MODE] **Query:** `{query}`" + result
+            result = await generate(query)
             await message.reply(result)
 
 bot.run(TOKEN)
