@@ -63,7 +63,7 @@ async def generate(prompt):
 @bot.tree.command(name="simulate", description="Roleplays as Olivia C.")
 async def simulate(interaction: discord.Interaction):
     await interaction.response.defer()
-    result = await generate(f"Say something about yourself, as if you are a {get_adj()} girl named Olivia.")
+    result = await generate(f"Say something about yourself, as if you are a {await get_adj()} girl named Olivia.")
     await interaction.followup.send(result)
 
 @bot.event
@@ -95,11 +95,11 @@ async def on_message(message: discord.Message):
 
         if f"<@{ID_SELF}>" in message.content:
             await message.channel.typing()
-            result = await generate(f"Respond as if you are a {get_adj()} girl named Olivia to the following message: \"{message.content.replace(f'<@{ID_SELF}>', 'Olivia')}\"")
+            result = await generate(f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content.replace(f'<@{ID_SELF}>', 'Olivia')}\"")
 
         elif "olivia" in message.content.lower():
             await message.channel.typing()
-            result = await generate(f"Respond as if you are a {get_adj()} girl named Olivia to the following message: \"{message.content}\"")
+            result = await generate(f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content}\"")
 
         elif the_misspell:
             await message.channel.typing()
@@ -107,7 +107,7 @@ async def on_message(message: discord.Message):
 
         elif is_reply:
             await message.channel.typing()
-            result = await generate(f"You are a {get_adj()} girl named Olivia and you are engaged in conversation. Pretend that you just said \"{reply_to_message.content}\". Someone named {message.author.display_name} just said the following as a reply to your own message: \"{message.content}\". Create a reply back.")
+            result = await generate(f"You are a {await get_adj()} girl named Olivia and you are engaged in conversation. Pretend that you just said \"{reply_to_message.content}\". Someone named {message.author.name} just said the following as a reply to your own message: \"{message.content}\". Create a reply back.")
 
         elif message.guild.id == 1015038824549716019:
             count += 1
@@ -118,7 +118,7 @@ async def on_message(message: discord.Message):
                 target = random.randint(TARGET_MIN, TARGET_MAX)
                 print(f"Target reached and funny sent! new target is {target}")
 
-                result = await generate(f"Someone named {message.author.display_name} just sent the following message: \"{message.content}\". Respond as if you are a {get_adj()} girl named Olivia.")
+                result = await generate(f"Someone named {message.author.name} just sent the following message: \"{message.content}\". Respond as if you are a {await get_adj()} girl named Olivia.")
 
         if result:
             await message.reply(result)
