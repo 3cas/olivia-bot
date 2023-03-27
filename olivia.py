@@ -110,7 +110,7 @@ async def on_message(message: discord.Message):
 
         elif is_reply:
             await message.channel.typing()
-            query = f"Complete the following conversation as a {get_adj()} girl named Olivia.\n\n"
+            query = f"Complete the following conversation as a {await get_adj()} girl named Olivia.\n\n"
             if message_bot_replied_to:
                 query += f"{message_bot_replied_to.author.name}: {message_bot_replied_to.content}\n"
             query += f"Olivia: {message_user_replied_to.content}\n{message.author.name}: {message.content}\nOlivia: "
