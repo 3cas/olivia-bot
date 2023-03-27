@@ -44,7 +44,7 @@ print(f"Original target set to {target}")
 
 async def get_adj():
     traits = ["mentally ill", "very pretty", "annoying", "flirtatious", "catlike"]
-    return f"{traits[random.randint(0, 4)]} {traits[random.randint(0, 4)]}"
+    return f"{traits[random.randint(0, 4)]} and {traits[random.randint(0, 4)]}"
 
 async def generate(prompt):
     url = "https://api.deepai.org/api/text-generator"
@@ -71,18 +71,21 @@ async def on_message(message: discord.Message):
     global count, target
 
     is_reply = False
-    the_misspell = None
+    misspell = None
     result = None
+    message_bot_replied_to = None
 
     if message.reference:
         channel = await bot.fetch_channel(message.reference.channel_id)
-        reply_to_message = await channel.fetch_message(message.reference.message_id)
-        if reply_to_message.author.id == ID_SELF:
+        message_user_replied_to = await channel.fetch_message(message.reference.message_id)
+        if message_user_replied_to.author.id == ID_SELF:
             is_reply = True
+            if message_user_replied_to.reference:
+                message_bot_replied_to = await channel.fetch_message(message_user_replied_to.reference.message_id)
 
-    for misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia", "olviia", "olivao"]:
-        if misspell in message.content.lower():
-            the_misspell = misspell
+    for possible_misspell in ["olvia", "oliva", "oliivia", "olivi", "oliver", "ovilia", "olviia", "olivao"]:
+        if possible_misspell in message.content.lower():
+            misspell = possible_misspell
             break
 
     if message.author.id != ID_SELF:
@@ -101,13 +104,18 @@ async def on_message(message: discord.Message):
             await message.channel.typing()
             result = await generate(f"Respond as if you are a {await get_adj()} girl named Olivia to the following message: \"{message.content}\"")
 
-        elif the_misspell:
+        elif misspell:
             await message.channel.typing()
-            result = await generate(f"Paraphrase the following, using expletives and all capitalized: YOU STUPID IDIOT! MY NAME ISN'T FREAKING {the_misspell.capitalize()} IT'S OLIVIA YOU DUMBASS!")
+            result = await generate(f"Paraphrase the following, using expletives and all capitalized: YOU STUPID IDIOT! MY NAME ISN'T FREAKING {misspell.capitalize()} IT'S OLIVIA YOU DUMBASS!")
 
         elif is_reply:
             await message.channel.typing()
-            result = await generate(f"You are a {await get_adj()} girl named Olivia and you are engaged in conversation. Pretend that you just said \"{reply_to_message.content}\". Someone named {message.author.name} just said the following as a reply to your own message: \"{message.content}\". Create a reply back.")
+            query = f"Complete the following conversation as a {get_adj()} girl named Olivia.\n\n"
+            if message_bot_replied_to:
+                query += f"{message_bot_replied_to.author.name}: {message_bot_replied_to.content}\n"
+            query += f"Olivia: {message_user_replied_to.content}\n{message.author.name}: {message.content}\nOlivia: "
+
+            result = await generate(query)
 
         elif message.guild.id == 1015038824549716019:
             count += 1
