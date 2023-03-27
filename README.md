@@ -10,5 +10,5 @@ There are 5 ways of activating Olivia bot.
 - **Misspelling** - If you misspell its name, it sometimes activates, very angrily calling you out for that.
 
 ### How it works
-Depending on the input given, Olivia bot queries [DeepAI's Text Generation API](https://deepai.org/machine-learning-model/text-generator) to generate a response, given varying contexts. Most activations generate two random adjectives from a pool of adjectives that describe Olivia, and tell the AI to respond as an <adjective> girl named Olivia. This is fairly straightforward except when trying to give the AI context, which it struggles with, sometimes producing a script-like fictional response.
+Depending on the input given, Olivia bot queries [DeepAI's Text Generation API](https://deepai.org/machine-learning-model/text-generator) to generate a response, given varying contexts. Most activations generate two random adjectives from a pool of adjectives that describe Olivia, and tell the AI to respond as an \<adjective> girl named Olivia. This is fairly straightforward except when trying to give the AI context, which it struggles with, sometimes producing a script-like fictional response.
 
