@@ -47,6 +47,8 @@ async def get_adj():
     return f"{traits[random.randint(0, 4)]} and {traits[random.randint(0, 4)]}"
 
 async def generate(prompt):
+    prompt = prompt.replace("$DEBUG", "")
+
     url = "https://api.deepai.org/api/text-generator"
     headers = {"api-key": DEEPAI_KEY}
     data = {"text": (None, prompt)}
@@ -126,9 +128,9 @@ async def on_message(message: discord.Message):
                 query = f"Someone named {message.author.name} just sent the following message: \"{message.content}\". Respond as if you are a {await get_adj()} girl named Olivia."
 
         if query:
+            result = await generate(query)
             if "$DEBUG" in message.content:
                 result = f"[DEBUG MODE] **Query:** `{query}`" + result
-            result = await generate(query)
             await message.reply(result)
 
 bot.run(TOKEN)
