@@ -126,7 +126,7 @@ async def on_message(message: discord.Message):
                 query = f"Someone named {message.author.name} just sent the following message: \"{message.content}\". Respond as if you are a {await get_adj()} girl named Olivia."
 
         if query:
-            if "$DEBUG" in message:
+            if "$DEBUG" in message.content:
                 result = f"[DEBUG MODE] **Query:** `{query}`" + result
             result = await generate(query)
             await message.reply(result)
