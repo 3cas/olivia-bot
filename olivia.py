@@ -83,10 +83,11 @@ async def on_message(message: discord.Message):
 
     if message.author.id != ID_SELF:
         if message.author.id == ID_MONKEY:
-            try:
-                await message.add_reaction("\u26a0")
-            except:
-                pass
+            if random.randint(1, 5) == 5:
+                try:
+                    await message.add_reaction("\u26a0")
+                except:
+                    pass
 
         if f"<@{ID_SELF}>" in message.content:
             await message.channel.typing()
