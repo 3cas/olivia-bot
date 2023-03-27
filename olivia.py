@@ -83,7 +83,7 @@ async def on_message(message: discord.Message):
 
     if message.author.id != ID_SELF:
         if message.author.id == ID_MONKEY:
-            if random.randint(1, 5) == 5:
+            if random.randint(1, 3) == 3:
                 try:
                     await message.add_reaction("\u26a0")
                 except:
