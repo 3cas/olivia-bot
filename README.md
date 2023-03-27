@@ -12,3 +12,5 @@ There are 5 ways of activating Olivia bot.
 ### How it works
 Depending on the input given, Olivia bot queries [DeepAI's Text Generation API](https://deepai.org/machine-learning-model/text-generator) to generate a response, given varying contexts. Most activations generate two random adjectives from a pool of adjectives that describe Olivia, and tell the AI to respond as an \<adjective> girl named Olivia. This is fairly straightforward except when trying to give the AI context, which it struggles with, sometimes producing a script-like fictional response.
 
+### Can I use this bot?
+You can invite the bot using [this link](https://discord.com/api/oauth2/authorize?client_id=1089381933710065804&permissions=414531832896&scope=bot%20applications.commands) if you want to try it out, but the server it was made for is private, so I can't provide that invite link. If you want to adapt this bot for your own purposes, feel free to do so, but if you do, you must do it as a fork of this repository and give me credit. Also, please consider starring this repository or following me if you like this bot. It means a lot to me as I don't have much of a following on GitHub.
